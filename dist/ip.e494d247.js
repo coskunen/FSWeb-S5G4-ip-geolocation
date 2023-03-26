@@ -13450,9 +13450,40 @@ function ipAdresimiAl() {
 	NOT: Bilgisayarın IP adresini öğrenmek için: https://apis.ergineer.com/ipadresim 
 	ADIM 5'e gelene kadar fonksiyonunuzu test etmek için ip nizi URL'ye manuel olarak ekleyebilirsiniz.
 */
-/* function getApiDetails {
+/*
+ADIM 2: Geri döndürülen verileri inceleyin, bu sizin ip bilgileriniz! Bileşen fonksiyonunuzu geliştirmek içindeki bu veri yapısını
+iyice anlamanız gerekmektedir.
 
-} */
+*/
+/*
+ADIM 3: Argümanı sadece 1 nesne kabül eden bir fonksiyon oluşturun.
+DOM metotlarını ve özelliklerini kullanarak, şunları gerçekleştirin:
+
+<div class="card">
+<img src={ülke bayrağı url} />
+	<div class="card-info">
+	<h3 class="ip">{ip adresi}</h3>
+	<p class="ulke">{ülke bilgisi (ülke kodu)}</p>
+	<p>Enlem: {enlem} Boylam: {boylam}</p>
+	<p>Şehir: {şehir}</p>
+	<p>Saat dilimi: {saat dilimi}</p>
+	<p>Para birimi: {para birimi}</p>
+	<p>ISP: {isp}</p>
+	</div>
+    </div>
+	*/
+/*
+ADIM 4: API'den alınan verileri kullanarak ADIM 3'te verilen yapıda bir kart oluşturun ve 
+bu kartı DOM olarak .cards elementinin içine ekleyin. 
+*/
+/*
+ADIM 5: Manuel olarak eklediğiniz IP adresini dinamiğe dönüştürün. 
+	Sayfanın en üstünde ---değiştirmeyin--- etiketleri arasında yer alan asenkron ipAdresimiAl() fonksiyonuna 
+	sorgu atarak bilgisayarınız IP adresini dinamik olarak aldıracaksınız. Bu fonksiyon asenkron olarak çağırıldığında `benimIP` değişkenine 
+	bilgisayarınızın IP adresini atayacaktır. 
+	Örnek dinamik URL kullanımı: var url = "https://apis.ergineer.com/ipgeoapi/"+benimIP; 
+*/
+//kodlar buraya gelecek
 function _ipAdresimiAl() {
   _ipAdresimiAl = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
     return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -13475,84 +13506,53 @@ function _ipAdresimiAl() {
   }));
   return _ipAdresimiAl.apply(this, arguments);
 }
-var cardContanier = document.querySelector(".cards");
-function getApiDetails() {
-  var apiREs = null;
-  _axios.default
+var apiRes = null;
+var ipadresim = ipAdresimiAl().then(function (response) {
   //.get( 'https://apis.ergineer.com/ipadresim')
-  .get('https://apis.ergineer.com/ipgeoapi/217.131.80.116').then(function (response) {
-    console.log(response.data);
-    apiREs = response.data;
-    cardContanier.append(cardYapici(apiREs));
-    return apiREs;
-  }).catch(function (error) {
-    console.log(error);
-  }).finally(function () {});
-}
-console.log(getApiDetails());
-/*
-	ADIM 2: Geri döndürülen verileri inceleyin, bu sizin ip bilgileriniz! Bileşen fonksiyonunuzu geliştirmek içindeki bu veri yapısını
-	iyice anlamanız gerekmektedir.
-	
-*/
-/*
-	ADIM 3: Argümanı sadece 1 nesne kabül eden bir fonksiyon oluşturun.
-    DOM metotlarını ve özelliklerini kullanarak, şunları gerçekleştirin:
-	
-	<div class="card">
-	<img src={ülke bayrağı url} />
-	<div class="card-info">
-		<h3 class="ip">{ip adresi}</h3>
-		<p class="ulke">{ülke bilgisi (ülke kodu)}</p>
-		<p>Enlem: {enlem} Boylam: {boylam}</p>
-		<p>Şehir: {şehir}</p>
-		<p>Saat dilimi: {saat dilimi}</p>
-		<p>Para birimi: {para birimi}</p>
-		<p>ISP: {isp}</p>
-	</div>
-    </div>
-*/
-var cardYapici = function cardYapici(data) {
-  var card = document.createElement("div");
-  card.classList.add("card");
-  var img = document.createElement("img");
-  img.setAttribute('src', data === null || data === void 0 ? void 0 : data["ülkebayrağı"]);
-  var cardInfo = document.createElement("div");
-  cardInfo.classList.add("card-info");
-  var baslik3 = document.createElement("h3");
-  baslik3.classList.add("ip");
-  baslik3.textContent = "IP ; ".concat(data.sorgu);
-  var ulkebilgisi = document.createElement("p");
-  ulkebilgisi.classList.add("ulke");
-  ulkebilgisi.textContent = "".concat(data[ülke], " (").concat(data === null || data === void 0 ? void 0 : data[ülkeKodu], ")");
-  var enboy = document.createElement("p");
-  enboy.textContent = "Enlem ".concat(data === null || data === void 0 ? void 0 : data.enlem, " Boylam ").concat(data === null || data === void 0 ? void 0 : data.boylam);
-  var sehir = document.createElement("p");
-  sehir.textContent = "Sehir ".concat(data === null || data === void 0 ? void 0 : data[şehir]);
-  var saatd = document.createElement("p");
-  saatd.textContent = "Saat dilim ".concat(data === null || data === void 0 ? void 0 : data.saatdilimi);
-  var parab = document.createElement("p");
-  parab.textContent = "Para birim ".concat(data === null || data === void 0 ? void 0 : data.parabirimi);
-  var ispBilgisi = document.createElement("p");
-  ispBilgisi.textContent = "ISP ; ".concat(data === null || data === void 0 ? void 0 : data.isp);
-  card.append(img, cardInfo, baslik3, ulkebilgisi, enlem, boylam, sehir, saatdilimi, parabirimi, ispBilgisi);
-  return card;
-};
+  _axios.default.get("https://apis.ergineer.com/ipgeoapi/".concat(response)).then(function (response) {
+    var cardContanier = document.querySelector(".cards");
+    cardContanier.appendChild(cardYapici(response.data));
+  }).catch(function (e) {
+    console.log("error", e);
+  });
+  function cardYapici(data) {
+    var card = document.createElement("div");
+    card.className = "card";
+    var img = document.createElement("img");
+    img.src = data.ülkebayrağı;
+    card.appendChild(img);
+    var cardInfo = document.createElement("div");
+    cardInfo.classList.add("card-info");
+    var baslik3 = document.createElement("h3");
+    baslik3.classList.add("ip");
+    baslik3.textContent = "IP ; ".concat(data.sorgu);
+    card.appendChild(baslik3);
+    var ulkebilgisi = document.createElement("p");
+    ulkebilgisi.classList.add("ulke");
+    ulkebilgisi.textContent = "".concat(data.ülke, " (").concat(data.ülkeKodu, ")");
+    card.appendChild(ulkebilgisi);
+    var enboy = document.createElement("p");
+    enboy.textContent = "Enlem ".concat(data === null || data === void 0 ? void 0 : data.enlem, " Boylam ").concat(data === null || data === void 0 ? void 0 : data.boylam);
+    card.appendChild(enboy);
+    var sehir = document.createElement("p");
+    sehir.textContent = "Sehir ".concat(data.şehir);
+    card.appendChild(sehir);
+    var saatd = document.createElement("p");
+    saatd.textContent = "Saat dilim ".concat(data === null || data === void 0 ? void 0 : data.saatdilimi);
+    card.appendChild(saatd);
+    var parab = document.createElement("p");
+    parab.textContent = "Para birim ".concat(data === null || data === void 0 ? void 0 : data.parabirimi);
+    card.appendChild(parab);
+    var ispBilgisi = document.createElement("p");
+    ispBilgisi.textContent = "ISP ; ".concat(data === null || data === void 0 ? void 0 : data.isp);
+    card.appendChild(ispBilgisi);
 
-/*
-	ADIM 4: API'den alınan verileri kullanarak ADIM 3'te verilen yapıda bir kart oluşturun ve 
-	bu kartı DOM olarak .cards elementinin içine ekleyin. 
-*/
+    /* card.append( img , cardInfo , baslik3, ulkebilgisi , enlem, boylam, sehir,
+    	saatdilimi , parabirimi, ispBilgisi); */
 
-/*
-	ADIM 5: Manuel olarak eklediğiniz IP adresini dinamiğe dönüştürün. 
-	Sayfanın en üstünde ---değiştirmeyin--- etiketleri arasında yer alan asenkron ipAdresimiAl() fonksiyonuna 
-	sorgu atarak bilgisayarınız IP adresini dinamik olarak aldıracaksınız. Bu fonksiyon asenkron olarak çağırıldığında `benimIP` değişkenine 
-	bilgisayarınızın IP adresini atayacaktır. 
-	Örnek dinamik URL kullanımı: var url = "https://apis.ergineer.com/ipgeoapi/"+benimIP; 
-*/
-
-//kodlar buraya gelecek
+    return card;
+  }
+});
 },{"axios":"node_modules/axios/index.js","babel-core/register":"node_modules/babel-core/register.js","babel-polyfill":"node_modules/babel-polyfill/lib/index.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -13578,7 +13578,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55510" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62499" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
